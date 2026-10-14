@@ -3,6 +3,12 @@
 
 import argparse
 
+try:
+    from brand import boot
+except Exception:
+    def boot(*a, **k):
+        pass
+
 
 def caesar_encrypt(text, shift):
     shift = shift % 26
@@ -52,6 +58,7 @@ def main():
     p.add_argument('--shift', type=int)
     p.add_argument('--text', type=str)
     a = p.parse_args()
+    boot("Caesar Cipher", "CS-01", "classic shift cipher - encrypt / decrypt text")
     if a.encrypt or a.decrypt:
         if a.shift is None or a.text is None:
             p.error("need --shift and --text")
